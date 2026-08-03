@@ -1,0 +1,416 @@
+// document.addEventListener("DOMContentLoaded", function () {
+//   const topbar = document.querySelector(".topbar");
+//   const header = document.querySelector("header");
+//   let lastScroll = 0;
+
+//   window.addEventListener("scroll", function () {
+//     const currentScroll = window.pageYOffset;
+
+//     if (currentScroll > 60) {
+//       topbar.classList.add("topbar-hidden");
+//       header.classList.add("is-stuck");
+//     } else {
+//       topbar.classList.remove("topbar-hidden");
+//       header.classList.remove("is-stuck");
+//     }
+
+//     lastScroll = currentScroll;
+//   });
+// });
+
+
+  // document.addEventListener("DOMContentLoaded", function () {
+  //   const dropdown = document.querySelector(".nav-item.dropdown");
+  //   const toggle = dropdown.querySelector(".dropdown-toggle");
+
+  //   dropdown.addEventListener("mouseenter", () => toggle.setAttribute("aria-expanded", "true"));
+  //   dropdown.addEventListener("mouseleave", () => toggle.setAttribute("aria-expanded", "false"));
+  // });
+
+/* ---------------- 8. LIGHTBOX ---------------- */
+ document.addEventListener("DOMContentLoaded", function () {
+  const filterButtons = document.querySelectorAll(".filter-btn");
+
+  const galleryItems = Array.from(
+    document.querySelectorAll(".gallery-item")
+  );
+
+  const galleryColumns = Array.from(
+    document.querySelectorAll(".gallery-column")
+  );
+
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+  const lightboxClose = document.getElementById("lightboxClose");
+  const lightboxPrev = document.getElementById("lightboxPrev");
+  const lightboxNext = document.getElementById("lightboxNext");
+
+  let currentIndex = 0;
+  let lastFocusedItem = null;
+
+  /*
+   * Stop the script when gallery elements are not available.
+   */
+  if (
+    galleryItems.length === 0 ||
+    !lightbox ||
+    !lightboxImg ||
+    !lightboxClose ||
+    !lightboxPrev ||
+    !lightboxNext
+  ) {
+    return;
+  }
+
+  /*
+   * Return currently visible gallery items.
+   */
+  function getVisibleItems() {
+    return galleryItems.filter(function (item) {
+      return !item.classList.contains("hide");
+    });
+  }
+
+  /*
+   * Hide columns that do not contain any visible images.
+   */
+  function updateVisibleColumns() {
+    galleryColumns.forEach(function (column) {
+      const visibleItem = column.querySelector(
+        ".gallery-item:not(.hide)"
+      );
+
+      column.classList.toggle(
+        "column-hidden",
+        !visibleItem
+      );
+    });
+  }
+
+  /*
+   * Gallery filtering.
+   */
+  filterButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const selectedCategory = button.dataset.filter;
+
+      filterButtons.forEach(function (filterButton) {
+        filterButton.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      galleryItems.forEach(function (item) {
+        const itemCategory = item.dataset.category;
+
+        const shouldShow =
+          selectedCategory === "all" ||
+          itemCategory === selectedCategory;
+
+        item.classList.toggle("hide", !shouldShow);
+      });
+
+      updateVisibleColumns();
+      closeLightbox();
+    });
+  });
+
+  /*
+   * Update the lightbox image.
+   */
+  function showCurrentImage() {
+    const visibleItems = getVisibleItems();
+
+    if (visibleItems.length === 0) {
+      closeLightbox();
+      return;
+    }
+
+    if (currentIndex < 0) {
+      currentIndex = visibleItems.length - 1;
+    }
+
+    if (currentIndex >= visibleItems.length) {
+      currentIndex = 0;
+    }
+
+    const image =
+      visibleItems[currentIndex].querySelector("img");
+
+    if (!image) {
+      return;
+    }
+
+    lightboxImg.src = image.currentSrc || image.src;
+    lightboxImg.alt = image.alt;
+  }
+
+  /*
+   * Open lightbox.
+   */
+  function openLightbox(item) {
+    const visibleItems = getVisibleItems();
+
+    currentIndex = visibleItems.indexOf(item);
+
+    if (currentIndex === -1) {
+      return;
+    }
+
+    lastFocusedItem = item;
+
+    showCurrentImage();
+
+    lightbox.classList.add("active");
+    lightbox.setAttribute("aria-hidden", "false");
+
+    document.body.style.overflow = "hidden";
+
+    lightboxClose.focus();
+  }
+
+  /*
+   * Close lightbox.
+   */
+  function closeLightbox() {
+    lightbox.classList.remove("active");
+    lightbox.setAttribute("aria-hidden", "true");
+
+    document.body.style.overflow = "";
+
+    if (lastFocusedItem) {
+      lastFocusedItem.focus();
+    }
+  }
+
+  /*
+   * Open selected gallery image.
+   */
+  galleryItems.forEach(function (item) {
+    item.setAttribute("tabindex", "0");
+    item.setAttribute("role", "button");
+    item.setAttribute("aria-label", "Open gallery image");
+
+    item.addEventListener("click", function () {
+      openLightbox(item);
+    });
+
+    item.addEventListener("keydown", function (event) {
+      if (
+        event.key === "Enter" ||
+        event.key === " "
+      ) {
+        event.preventDefault();
+        openLightbox(item);
+      }
+    });
+  });
+
+  /*
+   * Previous image.
+   */
+  lightboxPrev.addEventListener("click", function (event) {
+    event.stopPropagation();
+
+    currentIndex -= 1;
+    showCurrentImage();
+  });
+
+  /*
+   * Next image.
+   */
+  lightboxNext.addEventListener("click", function (event) {
+    event.stopPropagation();
+
+    currentIndex += 1;
+    showCurrentImage();
+  });
+
+  /*
+   * Close button.
+   */
+  lightboxClose.addEventListener("click", function () {
+    closeLightbox();
+  });
+
+  /*
+   * Prevent image clicks from closing the lightbox.
+   */
+  lightboxImg.addEventListener("click", function (event) {
+    event.stopPropagation();
+  });
+
+  /*
+   * Close when clicking the dark background.
+   */
+  lightbox.addEventListener("click", function (event) {
+    if (event.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  /*
+   * Keyboard navigation.
+   */
+  document.addEventListener("keydown", function (event) {
+    if (!lightbox.classList.contains("active")) {
+      return;
+    }
+
+    if (event.key === "Escape") {
+      closeLightbox();
+    }
+
+    if (event.key === "ArrowLeft") {
+      currentIndex -= 1;
+      showCurrentImage();
+    }
+
+    if (event.key === "ArrowRight") {
+      currentIndex += 1;
+      showCurrentImage();
+    }
+  });
+
+  /*
+   * Initial column check.
+   */
+  updateVisibleColumns();
+});
+
+ /* ---------------- 10. CONTACT FORM VALIDATION ---------------- */
+    var contactForm = document.getElementById('contactForm');
+    var formSuccess = document.getElementById('formSuccess');
+
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (!contactForm.checkValidity()) {
+        contactForm.classList.add('was-validated');
+        return;
+      }
+
+      // Simulated submit (no backend wired up — dummy behaviour)
+      formSuccess.classList.add('show');
+      contactForm.reset();
+      contactForm.classList.remove('was-validated');
+
+      setTimeout(function () {
+        formSuccess.classList.remove('show');
+      }, 5000);
+    });
+
+    /* ---------------- 11. BACK TO TOP ---------------- */
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const backToTopButton = document.getElementById("backToTop");
+
+    if (!backToTopButton) return;
+
+    function toggleBackToTopButton() {
+        if (window.scrollY > 300) {
+            backToTopButton.classList.add("show");
+        } else {
+            backToTopButton.classList.remove("show");
+        }
+    }
+
+    window.addEventListener("scroll", toggleBackToTopButton);
+
+    backToTopButton.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+
+    toggleBackToTopButton();
+});
+
+// Counter
+document.addEventListener("DOMContentLoaded", function () {
+    const aboutSection = document.getElementById("about");
+
+    if (!aboutSection) return;
+
+    const counters = aboutSection.querySelectorAll(".stat-num[data-count]");
+    let countersStarted = false;
+
+    function animateCounter(counter) {
+        const target = Number(counter.getAttribute("data-count"));
+        const duration = 1800;
+        const startTime = performance.now();
+
+        if (Number.isNaN(target)) return;
+
+        function updateCounter(currentTime) {
+            const elapsedTime = currentTime - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+
+            /* Smooth animation */
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+            const currentValue = Math.floor(target * easedProgress);
+
+            counter.textContent = currentValue.toLocaleString();
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target.toLocaleString();
+            }
+        }
+
+        requestAnimationFrame(updateCounter);
+    }
+
+    function startCounters() {
+        if (countersStarted) return;
+
+        countersStarted = true;
+
+        counters.forEach(function (counter) {
+            animateCounter(counter);
+        });
+    }
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+            function (entries, observerInstance) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        startCounters();
+                        observerInstance.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.25
+            }
+        );
+
+        observer.observe(aboutSection);
+    } else {
+        /* Fallback for older browsers */
+        startCounters();
+    }
+});
+
+
+
+// Modal
+
+document.addEventListener("DOMContentLoaded", function () {
+    const offerModalElement = document.getElementById("offerPopupModal");
+
+    if (!offerModalElement || typeof bootstrap === "undefined") {
+        return;
+    }
+
+    const offerModal = new bootstrap.Modal(offerModalElement);
+
+    setTimeout(function () {
+        offerModal.show();
+    }, 1500);
+});
