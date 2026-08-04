@@ -1,0 +1,307 @@
+
+
+Rekha banner concepts · HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rekha Aari Arts — Banner Concepts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Marcellus&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F7EFE3;
+    --cream-deep:#F1E4D3;
+    --maroon:#7A1B36;
+    --maroon-deep:#5C1327;
+    --gold:#B8874A;
+    --gold-light:#D8B979;
+    --ink:#2E241F;
+    --teal:#2F6B63;
+    --line: rgba(122,27,54,0.18);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#EAE1D2;
+    font-family:'Jost',sans-serif;
+    color:var(--ink);
+  }
+  .display{ font-family:'Marcellus', serif; }
+  .script{ font-family:'Cormorant Garamond', serif; font-style:italic; }
+ 
+  /* ---- Tab switcher ---- */
+  .switcher-wrap{
+    position:sticky; top:0; z-index:50;
+    background:#2E241F;
+    padding:14px 20px;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    flex-wrap:wrap;
+  }
+  .switcher-label{
+    color:#C9B896; font-family:'Jost'; font-size:12px; letter-spacing:.14em;
+    text-transform:uppercase; margin-right:8px;
+  }
+  .tab{
+    appearance:none; border:1px solid rgba(216,185,121,0.4); background:transparent;
+    color:#E9DFC9; font-family:'Jost'; font-size:13px; letter-spacing:.03em;
+    padding:9px 18px; border-radius:999px; cursor:pointer; transition:.2s;
+  }
+  .tab:hover{ border-color:var(--gold-light); }
+  .tab.active{ background:var(--gold-light); color:#2E241F; border-color:var(--gold-light); font-weight:600; }
+ 
+  .concept{ display:none; }
+  .concept.active{ display:block; }
+ 
+  .concept-tag{
+    text-align:center; padding:18px 20px 4px;
+    font-family:'Jost'; font-size:12px; letter-spacing:.12em; color:#8a6f4a;
+    text-transform:uppercase;
+  }
+  .concept-title{
+    text-align:center; padding:0 20px 22px;
+    font-family:'Marcellus'; font-size:15px; color:#5c4a35;
+  }
+ 
+  /* ================= CONCEPT 1: full-bleed background photo ================= */
+  .c1-hero{
+    position:relative; min-height:640px; overflow:hidden;
+    display:flex; align-items:center;
+  }
+  .c1-photo{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(184,135,74,0.35), transparent 55%),
+      linear-gradient(115deg, #4a0f1f 0%, #7A1B36 30%, #9c3350 55%, #7A1B36 78%, #4a0f1f 100%);
+  }
+  .c1-photo::before{
+    content:"YOUR PHOTO HERE — full bridal blouse back, worn on a model, soft studio light";
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    text-align:center; color:rgba(255,255,255,0.55); font-family:'Jost'; font-size:13px;
+    letter-spacing:.08em; padding:0 30%; border:2px dashed rgba(255,255,255,0.25); margin:14px;
+  }
+  .c1-photo .motif{ position:absolute; opacity:.18; }
+  .c1-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(90deg, rgba(20,6,12,0.72) 0%, rgba(20,6,12,0.45) 45%, rgba(20,6,12,0.05) 75%);
+  }
+  .c1-content{ position:relative; z-index:2; padding:60px 8%; max-width:640px; }
+  .c1-eyebrow{ color:#E8C98B; font-size:12px; letter-spacing:.22em; text-transform:uppercase; margin-bottom:18px; }
+  .c1-title{ color:#fff; font-size:56px; line-height:1.08; margin:0 0 20px; }
+  .c1-sub{ color:#F0D9B8; font-size:24px; margin:0 0 18px; }
+  .c1-body{ color:rgba(255,255,255,0.82); font-size:16px; line-height:1.7; max-width:480px; margin-bottom:32px; }
+  .btn-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn-solid{
+    background:var(--maroon); color:#fff; border:1px solid var(--maroon);
+    padding:15px 28px; font-family:'Jost'; font-size:13px; letter-spacing:.08em;
+    text-transform:uppercase; cursor:pointer; text-decoration:none; display:inline-block;
+  }
+  .btn-outline{
+    background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.7);
+    padding:15px 28px; font-family:'Jost'; font-size:13px; letter-spacing:.08em;
+    text-transform:uppercase; cursor:pointer; text-decoration:none; display:inline-block;
+  }
+  .c1-content .btn-solid{ background:#fff; color:var(--maroon-deep); border-color:#fff; }
+ 
+  /* ================= CONCEPT 2: split layout, right-side carousel ================= */
+  .c2-hero{
+    background:var(--cream);
+    display:grid; grid-template-columns:1.05fr 0.95fr; min-height:600px;
+  }
+  .c2-left{ padding:70px 6% 70px 8%; display:flex; flex-direction:column; justify-content:center; }
+  .c2-eyebrow{ color:var(--teal); font-size:12px; letter-spacing:.2em; text-transform:uppercase; margin-bottom:16px; }
+  .c2-title{ font-size:52px; line-height:1.1; color:var(--ink); margin:0 0 18px; }
+  .c2-sub{ color:var(--maroon); font-size:24px; margin:0 0 16px; }
+  .c2-body{ color:#6b5c4c; font-size:16px; line-height:1.75; margin-bottom:30px; max-width:460px; }
+  .c2-btn-solid{
+    background:var(--maroon); color:#fff; border:none; padding:16px 30px;
+    font-family:'Jost'; font-size:13px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;
+  }
+  .c2-btn-outline{
+    background:transparent; color:var(--maroon); border:1px solid var(--maroon); padding:16px 30px;
+    font-family:'Jost'; font-size:13px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; margin-left:12px;
+  }
+  .c2-right{
+    position:relative; background:var(--cream-deep); overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .carousel{ position:relative; width:78%; aspect-ratio:4/5; }
+  .slide{
+    position:absolute; inset:0; border-radius:4px;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    color:rgba(255,255,255,0.75); font-family:'Jost'; font-size:13px; letter-spacing:.06em;
+    padding:20%; opacity:0; transition:opacity .7s ease; border:1px solid rgba(255,255,255,0.35);
+  }
+  .slide.on{ opacity:1; }
+  .slide1{ background:linear-gradient(150deg,#8a2340,#5c1327); }
+  .slide2{ background:linear-gradient(150deg,#a5793c,#6d4a20); }
+  .slide3{ background:linear-gradient(150deg,#3f6d63,#1f3d38); }
+  .dots{ position:absolute; bottom:-34px; left:50%; transform:translateX(-50%); display:flex; gap:8px; }
+  .dot{ width:7px; height:7px; border-radius:50%; background:rgba(122,27,54,0.25); transition:.3s; }
+  .dot.on{ background:var(--maroon); width:20px; border-radius:4px; }
+  .frame-corner{
+    position:absolute; width:34px; height:34px; border:2px solid var(--gold-light); opacity:.9;
+  }
+  .fc-tl{ top:-12px; left:-12px; border-right:none; border-bottom:none; }
+  .fc-br{ bottom:-12px; right:-12px; border-left:none; border-top:none; }
+ 
+  /* ================= CONCEPT 3: framed collage cluster ================= */
+  .c3-hero{
+    background:linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
+    display:grid; grid-template-columns:1fr 1fr; align-items:center; min-height:640px; gap:20px;
+  }
+  .c3-left{ padding:60px 6% 60px 8%; }
+  .c3-eyebrow{ color:var(--teal); font-size:12px; letter-spacing:.2em; text-transform:uppercase; margin-bottom:16px; }
+  .c3-title{ font-size:50px; line-height:1.1; color:var(--ink); margin:0 0 16px; }
+  .c3-sub{ color:var(--maroon); font-size:23px; margin:0 0 16px; }
+  .c3-body{ color:#6b5c4c; font-size:15.5px; line-height:1.75; margin-bottom:28px; max-width:440px; }
+  .c3-right{ position:relative; padding:40px 8% 40px 0; height:100%; }
+  .collage{ position:relative; height:520px; }
+  .cframe{
+    position:absolute; border:6px solid #fff; box-shadow:0 18px 40px rgba(60,20,20,0.22);
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    color:rgba(255,255,255,0.8); font-family:'Jost'; font-size:11.5px; letter-spacing:.05em; padding:10%;
+  }
+  .cf1{ width:58%; height:62%; top:0; left:8%; background:linear-gradient(160deg,#8a2340,#4a0f1f); transform:rotate(-3deg); z-index:2; }
+  .cf2{ width:48%; height:46%; bottom:0; right:2%; background:linear-gradient(160deg,#c99a4e,#7a5a25); transform:rotate(4deg); z-index:3; }
+  .cf3{ width:36%; height:34%; top:6%; right:0; background:linear-gradient(160deg,#3f6d63,#1f3d38); transform:rotate(-6deg); z-index:1; }
+  .badge{
+    position:absolute; bottom:-16px; left:14%; background:var(--gold-light); color:#2E241F;
+    font-family:'Marcellus'; font-size:13px; padding:12px 20px; box-shadow:0 8px 20px rgba(0,0,0,0.18);
+    z-index:4; text-align:center; line-height:1.3;
+  }
+ 
+  /* ---- Notes footer ---- */
+  .notes{
+    background:#2E241F; color:#C9B896; padding:40px 8%; font-family:'Jost'; font-size:13.5px; line-height:1.8;
+  }
+  .notes h4{ color:#E9DFC9; font-family:'Marcellus'; font-size:16px; margin:0 0 10px; }
+ 
+  @media (max-width:860px){
+    .c2-hero, .c3-hero{ grid-template-columns:1fr; }
+    .c1-title, .c2-title, .c3-title{ font-size:36px; }
+    .c1-content{ padding:40px 6%; max-width:100%; }
+    .c1-overlay{ background:linear-gradient(180deg, rgba(20,6,12,0.75) 20%, rgba(20,6,12,0.35) 100%); }
+    .collage{ height:360px; }
+  }
+</style>
+</head>
+<body>
+ 
+<div class="switcher-wrap">
+  <span class="switcher-label">Preview</span>
+  <button class="tab active" data-target="c1">1 · Full Background Photo</button>
+  <button class="tab" data-target="c2">2 · Split + Right Carousel</button>
+  <button class="tab" data-target="c3">3 · Framed Photo Collage</button>
+</div>
+ 
+<!-- CONCEPT 1 -->
+<section class="concept active" id="c1">
+  <div class="concept-tag">Concept 1</div>
+  <div class="concept-title">Full-bleed background photograph, text overlaid on the left with a soft dark gradient for readability</div>
+  <div class="c1-hero">
+    <div class="c1-photo"></div>
+    <div class="c1-overlay"></div>
+    <div class="c1-content">
+      <div class="c1-eyebrow">Est. 2018 · Handcrafted in India</div>
+      <h1 class="c1-title display">Handcrafted Blouse<br>Aari Arts</h1>
+      <p class="c1-sub script">Where Tradition Meets Elegance</p>
+      <p class="c1-body">Every blouse is hand-embroidered thread by thread, stone by stone — Aari, Maggam and Zardosi work created for brides who want their wedding attire to carry a story, not just a stitch.</p>
+      <div class="btn-row">
+        <a class="btn-solid" href="#">Book Your Design</a>
+        <a class="btn-outline" href="#">Call Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CONCEPT 2 -->
+<section class="concept" id="c2">
+  <div class="concept-tag">Concept 2</div>
+  <div class="concept-title">Text stays left like your current layout — right side becomes an auto-rotating carousel of finished blouses</div>
+  <div class="c2-hero">
+    <div class="c2-left">
+      <div class="c2-eyebrow">Est. 2018 · Handcrafted in India</div>
+      <h1 class="c2-title display">Handcrafted Blouse<br>Aari Arts</h1>
+      <p class="c2-sub script">Where Tradition Meets Elegance</p>
+      <p class="c2-body">Every blouse is hand-embroidered thread by thread, stone by stone — Aari, Maggam and Zardosi work created for brides who want their wedding attire to carry a story, not just a stitch.</p>
+      <div>
+        <button class="c2-btn-solid">Book Your Design</button>
+        <button class="c2-btn-outline">Call Now</button>
+      </div>
+    </div>
+    <div class="c2-right">
+      <div class="carousel">
+        <div class="frame-corner fc-tl"></div>
+        <div class="frame-corner fc-br"></div>
+        <div class="slide slide1 on">Photo 1 — Peacock Aari back design, red silk</div>
+        <div class="slide slide2">Photo 2 — Zardosi neckline close-up, gold thread</div>
+        <div class="slide slide3">Photo 3 — Maggam work, emerald green blouse</div>
+        <div class="dots">
+          <div class="dot on"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CONCEPT 3 -->
+<section class="concept" id="c3">
+  <div class="concept-tag">Concept 3</div>
+  <div class="concept-title">A layered, boutique-style photo collage on the right — three photos at different sizes with a small gold accent badge</div>
+  <div class="c3-hero">
+    <div class="c3-left">
+      <div class="c3-eyebrow">Est. 2018 · Handcrafted in India</div>
+      <h1 class="c3-title display">Handcrafted Blouse<br>Aari Arts</h1>
+      <p class="c3-sub script">Where Tradition Meets Elegance</p>
+      <p class="c3-body">Every blouse is hand-embroidered thread by thread, stone by stone — Aari, Maggam and Zardosi work created for brides who want their wedding attire to carry a story, not just a stitch.</p>
+      <div>
+        <button class="c2-btn-solid">Book Your Design</button>
+        <button class="c2-btn-outline">Call Now</button>
+      </div>
+    </div>
+    <div class="c3-right">
+      <div class="collage">
+        <div class="cframe cf1">Main photo<br>Bride wearing<br>finished blouse</div>
+        <div class="cframe cf2">Close-up<br>embroidery detail</div>
+        <div class="cframe cf3">Work-in-<br>progress shot</div>
+        <div class="badge">7+ years<br>of craft</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<div class="notes">
+  <h4>How to use this</h4>
+  Swap every dashed / labelled block above for your own photography — the layouts, spacing and type are already set up for real photos, this is just a stand-in so you can judge composition before shooting or picking images. Concept 2 is closest to a safe, quick win over your current banner. Concept 1 feels the most premium/bridal but needs one strong hero photo. Concept 3 works well if you have a small library of detail shots already.
+</div>
+ 
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const concepts = document.querySelectorAll('.concept');
+  tabs.forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      tabs.forEach(t=>t.classList.remove('active'));
+      concepts.forEach(c=>c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.target).classList.add('active');
+    });
+  });
+ 
+  // Concept 2 auto carousel
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  let idx = 0;
+  setInterval(()=>{
+    slides[idx].classList.remove('on');
+    dots[idx].classList.remove('on');
+    idx = (idx+1) % slides.length;
+    slides[idx].classList.add('on');
+    dots[idx].classList.add('on');
+  }, 2600);
+</script>
+ 
+</body>
+</html>
+ 
