@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin:0;
   padding:0;
+  
 }
 
 
@@ -136,10 +137,13 @@ p{
   color: var(--dark-gold);
 }
 
-.main-logo{
-    height: 100px;
-    width: 100px;
-    transition: height 0.3s ease, width 0.3s ease;
+
+
+.main-logo {
+    width: 200px;
+    height: auto;
+    transform: scale(1.15);
+    transform-origin: left center;
 }
 
 /* Nav bar */
@@ -540,7 +544,7 @@ header.is-stuck .main-logo {
   right: -10px;
   background: var(--pink); 
   color: var(--white);
-  padding: 1.2rem 1.6rem; 
+  padding: 1.0rem 1.2rem; 
   border-radius: 10px;
   text-align: center; 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
@@ -629,6 +633,9 @@ header.is-stuck .main-logo {
     color: #7a6b64; 
     font-size: 0.92rem; 
     margin: 0; 
+}
+.why-us-margin{
+  margin:10px 0;
 }
 
 /* ---------------------------------------------------------------
@@ -1703,7 +1710,7 @@ header.is-stuck .main-logo {
 
 @media (max-width: 767.98px) {
   .faq-testimonial-section {
-    padding: 4rem 0;
+    padding: 3rem 0;
   }
 
   .faq-wrapper,
@@ -2721,12 +2728,17 @@ header.is-stuck .main-logo {
 .hero-art-frame {
     position: relative;
     display: inline-block;
-    max-width: 350px;
+    max-width: 250px;
 }
-  .about-stat-badge { position: static; margin-top: 1rem; display: inline-block; }
+  .about-stat-badge { 
+    /* position: static; */
+     margin-top: 1rem; display: inline-block; }
   .about-checklist { grid-template-columns: 1fr; }
 
-  .why-card { padding: 2rem 1.4rem; }
+  .why-card { 
+    padding: 2rem 1.4rem; 
+      
+  }
 
   .contact-info-card, .contact-form { padding: 1.8rem; }
 
@@ -2741,6 +2753,27 @@ header.is-stuck .main-logo {
     bottom: 80px;
     width: 50px;
     height: 50px;
+  }
+  .counter-card {
+    margin:10px;
+  }
+  .about-section{
+    padding:3rem 0;
+  }
+  .why-us-section{
+    padding:3rem 0;
+  }
+  .why-us-margin{
+    margin:10px 0;
+  }
+  .process-section{
+    padding:3rem 0;
+  }
+  .contact-section{
+    padding:3rem 0;
+  }
+  .main-logo{
+    width: 150px;
   }
 }
 /* ---------------- Large Desktops / below 1200px ---------------- */
