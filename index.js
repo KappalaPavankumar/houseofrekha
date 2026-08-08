@@ -279,28 +279,82 @@
 });
 
  /* ---------------- 10. CONTACT FORM VALIDATION ---------------- */
-    var contactForm = document.getElementById('contactForm');
-    var formSuccess = document.getElementById('formSuccess');
+document.addEventListener('DOMContentLoaded', function () {
 
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async function (e) {
+
+    e.preventDefault();
+
+    // Bootstrap validation
+    if (!form.checkValidity()) {
       e.stopPropagation();
+      form.classList.add('was-validated');
+      return;
+    }
 
-      if (!contactForm.checkValidity()) {
-        contactForm.classList.add('was-validated');
-        return;
+    form.classList.add('was-validated');
+
+    const formData = new FormData(form);
+    const originalText = submitBtn.textContent;
+
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
+    try {
+
+      const response = await fetch(
+        'https://api.web3forms.com/submit',
+        {
+          method: 'POST',
+          body: formData
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+
+        // Clear all form fields
+        form.reset();
+
+        // Remove Bootstrap validation styles
+        form.classList.remove('was-validated');
+
+        alert('Success! Your enquiry has been sent.');
+
+        // Redirect to home page
+        window.location.href = 'https://www.rekhadesigns.in/';
+
+      } else {
+
+        alert(
+          data.message ||
+          'Something went wrong. Please try again.'
+        );
+
       }
 
-      // Simulated submit (no backend wired up — dummy behaviour)
-      formSuccess.classList.add('show');
-      contactForm.reset();
-      contactForm.classList.remove('was-validated');
+    } catch (error) {
 
-      setTimeout(function () {
-        formSuccess.classList.remove('show');
-      }, 5000);
-    });
+      console.error('Web3Forms error:', error);
 
+      alert(
+        'Something went wrong. Please try again.'
+      );
+
+    } finally {
+
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+
+    }
+
+  });
+
+});
     /* ---------------- 11. BACK TO TOP ---------------- */
 
 
