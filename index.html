@@ -1470,41 +1470,48 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
 
           <div class="col-lg-7  order-1 order-md-2" data-animate="fade-left">
-            <form class="contact-form glass-card" id="contactForm" novalidate>
-              <div class="row">
-                <div class="col-md-6">
-                  <label for="cf-name" class="form-label">Name</label>
-                  <input type="text" class="form-control" id="cf-name" name="name" required>
-                  <div class="invalid-feedback">Please enter your name.</div>
-                </div>
-                <div class="col-md-6">
-                  <label for="cf-phone" class="form-label">Phone</label>
-                  <input type="tel" class="form-control" id="cf-phone" name="phone" pattern="[0-9]{10}" required>
-                  <div class="invalid-feedback">Please enter a valid 10-digit phone number.</div>
-                </div>
-                <div class="col-md-6">
-                  <label for="cf-email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="cf-email" name="email" required>
-                  <div class="invalid-feedback">Please enter a valid email address.</div>
-                </div>
-                <div class="col-md-6">
-                  <label for="cf-subject" class="form-label">Subject</label>
-                  <input type="text" class="form-control" id="cf-subject" name="subject" required>
-                  <div class="invalid-feedback">Please enter a subject.</div>
-                </div>
-                <div class="col-12">
-                  <label for="cf-message" class="form-label">Message</label>
-                  <textarea class="form-control" id="cf-message" name="message" rows="5" required></textarea>
-                  <div class="invalid-feedback">Please enter your message.</div>
-                </div>
-                <div class="col-12 col-sm-12 col-lg-6">
-                  <button type="submit" class="btn btn-custom w-100">Submit Enquiry</button>
-                </div>
-                <div class="col-12">
-                  <p class="form-success" id="formSuccess" role="status">Thank you — your enquiry has been received. We'll reach out shortly.</p>
+                      <form class="contact-form glass-card" id="contactForm" action="https://api.web3forms.com/submit" method="POST"
+            novalidate>
+
+            <input type="hidden" name="access_key" value="fe12d25f-1e54-4a87-9f85-1ef8a8208ac3">
+
+            <div class="row g-3">
+
+              <!-- Name -->
+              <div class="col-md-6">
+                <label for="cf-name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="cf-name" name="name" required minlength="2">
+                <div class="invalid-feedback">
+                  Please enter your name.
                 </div>
               </div>
-            </form>
+
+              <!-- Phone -->
+              <div class="col-md-6">
+                <label for="cf-phone" class="form-label">Phone</label>
+                <input type="tel" class="form-control" id="cf-phone" name="Phone Number" pattern="[0-9]{10}"
+                  maxlength="10" required>
+                <div class="invalid-feedback">
+                  Please enter a valid 10-digit phone number.
+                </div>
+              </div>
+
+
+              <!-- Message -->
+              <div class="col-12">
+                <label for="cf-message" class="form-label">Message</label>
+                <textarea class="form-control" id="cf-message" name="message" rows="5"></textarea>
+              </div>
+
+              <!-- Submit -->
+              <div class="col-12 col-sm-12 col-lg-6">
+                <button type="submit" class="btn btn-custom w-100" id="submitBtn">
+                  Submit Enquiry
+                </button>
+              </div>
+
+            </div>
+          </form>
           </div>
         </div>
       </div>
