@@ -2945,7 +2945,7 @@ header.is-stuck .main-logo {
  
 .panel-media{
   position:relative;
-  height:230px;
+  height:300px;
   flex-shrink:0;
   overflow:hidden;
   background:linear-gradient(150deg,var(--maroon) 0%, var(--maroon) 70%);
@@ -3102,6 +3102,61 @@ header.is-stuck .main-logo {
     box-shadow:0 8px 18px rgba(92,26,46,.35);
     color:var(--gold);
   }
+
+  .footer-copyright {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    font-size: 14px;
+    color: var(--cream) ;
+}
+
+.footer-copyright p {
+    margin: 4px 0;
+    color: var(--cream)
+}
+.note {
+    margin-top: 20px;
+}
+
+.note > p:first-child {
+    margin-bottom: 15px;
+}
+
+.payment-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px 18px;
+    border: 1px solid #c9a227;
+    border-left: 4px solid #c9a227;
+    background: rgba(201, 162, 39, 0.08);
+    border-radius: 6px;
+}
+
+.payment-alert-icon {
+    font-size: 20px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.payment-alert strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.payment-alert p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.response-note {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
  
   /* ---------- Responsive tuning ---------- */
   @media (max-width: 767.98px){
@@ -3116,7 +3171,7 @@ header.is-stuck .main-logo {
       width:100%;
     }
     .panel-media{
-      height:190px;
+      height:300px;
     }
     .panel-body{
       padding:24px 20px 28px;
