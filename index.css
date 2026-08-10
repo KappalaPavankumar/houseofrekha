@@ -2900,7 +2900,7 @@ header.is-stuck .main-logo {
      ============================================================ */
   .special-panel{
     position:fixed;
-    top:10%;
+    top:0;
     right:0;
     height:auto;
     width:min(430px, 92vw);
