@@ -3208,3 +3208,170 @@ header.is-stuck .main-logo {
       transition:none !important;
     }
   }
+
+
+  .craft-service-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Small service arrow */
+.craft-service-link {
+    position: relative;
+    width: 42px;
+    height: 42px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #c9a227;
+    border-radius: 50%;
+
+    color: #8f1738;
+    background: transparent;
+
+    text-decoration: none;
+
+    transition: all 0.3s ease;
+}
+
+.craft-service-link i {
+    font-size: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* View Service label */
+.craft-service-tooltip {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+
+    transform: translateX(-50%) translateY(8px);
+
+    padding: 7px 12px;
+
+    background: #8f1738;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+
+    border-radius: 4px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: all 0.25s ease;
+
+    pointer-events: none;
+}
+
+/* Small arrow under tooltip */
+.craft-service-tooltip::after {
+    content: "";
+    position: absolute;
+
+    bottom: -5px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #8f1738;
+}
+
+/* Hover */
+.craft-service-link:hover {
+    background: #c9a227;
+    color: #ffffff;
+}
+
+.craft-service-link:hover i {
+    transform: translate(2px, -2px);
+}
+
+.craft-service-link:hover .craft-service-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* =========================
+   BREADCRUMB
+========================= */
+
+.breadcrumb-wrapper {
+    padding: 20px 0 10px;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.breadcrumb-item {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.breadcrumb-item a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #8f1738;
+    text-decoration: none;
+
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: #c9a227;
+}
+
+.breadcrumb-item a i {
+    font-size: 13px;
+}
+
+.breadcrumb-separator {
+    display: flex;
+    align-items: center;
+
+    color: #c9a227;
+    font-size: 9px;
+}
+
+.breadcrumb-item.active {
+    color: #777;
+}
+
+.service-detail-section a{
+  color: var(--green);
+}
+
+.service-detail-section a:hover{
+  color: var(--pink);
+}
+.btn.btn-custom.service-whatsapp-btn{
+  color: var(--white);
+  background-color: #25d366;
+}
+
+.btn.btn-custom.normal-btn{
+  color: var(--white);
+}
+
+.btn.btn-custom.normal-btn:hover{
+  color: var(--pink);
+}

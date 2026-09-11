@@ -44,8 +44,8 @@ function setCurrentYear() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   await Promise.all([
-    loadComponent("site-header", "components/header.html"),
-    loadComponent("site-footer", "components/footer.html"),
+    loadComponent("site-header", "/components/header.html"),
+    loadComponent("site-footer", "/components/footer.html"),
   ]);
 
   setActiveNavigation();
